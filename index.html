@@ -1,0 +1,57 @@
+<html>
+<head>
+<title>
+Google Maps API v3 - Adding marker and info window on Click and creating a form in the infowindow with the lat-lng information in it.
+</title>
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+<script type="text/javascript">
+var map;    //When using event as a parameter to a function declare map, strictly as a global variable
+function initialize()
+{
+    var myLatlng = new google.maps.LatLng(28.635157,77.22496);
+      map = new google.maps.Map(document.getElementById("map_canvas"),
+    {
+        zoom: 14,
+        center: myLatlng,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+    });
+
+    google.maps.event.addListener(map, 'click', function(event)
+    {
+        placeMarker(event.latLng);
+    });
+}
+  
+function placeMarker(location)
+{
+    var marker = new google.maps.Marker(
+    {
+        position: location, 
+        map: map
+    });
+
+    var coords= location.lat().toFixed(6) + ',' + location.lng().toFixed(6);
+
+    var html = "<table>" +
+                 "<tr><td>Name:</td> <td><input type='text' id='name'/> </td> </tr>" +
+        "<tr><td>Location:</td> <td><input type='text' value = " + coords +" id='loc'></td> </tr>" +
+                 "<tr><td>Cache Object Taken:</td> <td><input type='text' id='ctake'/></td> </tr>" +
+                 "<tr><td>Cache Object Placed:</td> <td><input type='text' id='cput'/></td> </tr>" +
+                 "<tr><td></td><td><input type='button' value='Save' onclick='saveData()'/></td></tr>";
+
+    var infowindow = new google.maps.InfoWindow(
+    {
+        content: html
+    });
+
+    google.maps.event.addListener(marker, 'click', function()
+    {
+        infowindow.open(map,marker);
+    });
+}
+</script>
+</head>
+<body onload="initialize()" onunload="GUnload()">
+<div id="map_canvas" style="width: 100%; height: 100%"></div>
+</body>
+</html>
