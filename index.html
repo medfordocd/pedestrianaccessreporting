@@ -1,15 +1,35 @@
 <html>
 <head>
-<title>
-Pedestrian Access Map
-</title>
-<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDvoCswhfccbSj_OtsLWPj-zJmwQQStkY8&callback=initMap"
-  type="text/javascript"></script>
-<script type="text/javascript"></script>
-
-</script>
+	<meta name="viewport" content="initial-scale=1.0">
+	<meta charset="utf-8">
+<title>Pedestrian Access Map</title>
+	<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDvoCswhfccbSj_OtsLWPj-zJmwQQStkY8&callback=initMap"
+	type="text/javascript"></script>
+	<script type="text/javascript"></script>
+	<style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 100%;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
 </head>
 <body onload="initialize()" onunload="GUnload()">
-<div>https://www.google.com/maps?ll=42.421739,-71.103642&z=14&t=m&hl=en-US&gl=US&mapclient=embed</div>
+	<div id="map"></div>
+		<script>
+			var map;
+			function initMap() {
+				map = new google.maps.Map(document.getElementById('map'), {
+				center: {lat: -34.397, lng: 150.644},
+				zoom: 8
+				});
+			}
+		</script>
 </body>
 </html>
